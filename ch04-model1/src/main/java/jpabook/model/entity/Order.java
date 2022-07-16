@@ -3,13 +3,9 @@ package jpabook.model.entity;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by holyeye on 2014. 3. 11..
- */
 @Entity
 @Table(name = "ORDERS")
 public class Order {
-
     @Id
     @GeneratedValue
     @Column(name = "ORDER_ID")
@@ -19,12 +15,11 @@ public class Order {
     private Long memberId;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;     //주문시간
+    private Date orderDate;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;//주문상태
+    private OrderStatus status;
 
-    //Getter, Setter
     public Long getId() {
         return id;
     }

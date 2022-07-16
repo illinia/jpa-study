@@ -2,23 +2,18 @@ package jpabook.model.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by holyeye on 2014. 3. 11..
- */
-
 @Entity
+@Table(name = "ITEM_ID")
 public class Item {
-
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "ITEM_ID")
     private Long id;
 
-    private String name;        //이름
-    private int price;          //가격
-    private int stockQuantity;  //재고수량
+    private String name;
+    private int price;
+    private int stockQuantity;
 
-
-    //Getter, Setter
     public Long getId() {
         return id;
     }
@@ -49,14 +44,5 @@ public class Item {
 
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
     }
 }
