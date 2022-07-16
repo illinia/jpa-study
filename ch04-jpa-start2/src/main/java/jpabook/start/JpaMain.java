@@ -35,6 +35,11 @@ public class JpaMain {
 
     public static void logic(EntityManager em) {
 
+        Board board = new Board();
+//        board.setId(1L);
+        em.persist(board);
+        System.out.println("board.id = " + board.getId());
+
         String id = "id1";
         Member member = new Member();
         member.setId(id);
@@ -54,6 +59,8 @@ public class JpaMain {
         //목록 조회
         List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
         System.out.println("members.size=" + members.size());
+
+
 
         //삭제
         em.remove(member);
