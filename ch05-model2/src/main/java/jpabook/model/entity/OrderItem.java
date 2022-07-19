@@ -2,29 +2,25 @@ package jpabook.model.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by holyeye on 2014. 3. 11..
- */
 @Entity
 @Table(name = "ORDER_ITEM")
 public class OrderItem {
-
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
-    private Item item;      //주문 상품
+    private Item item;
 
     @ManyToOne
     @JoinColumn(name = "ORDER_ID")
-    private Order order;    //주문
+    private Order order;
 
-    private int orderPrice; //주문 가격
-    private int count;      //주문 수량
+    private int orderPrice;
+    private int count;
 
-    //Getter, Setter
     public Long getId() {
         return id;
     }
@@ -69,7 +65,7 @@ public class OrderItem {
     public String toString() {
         return "OrderItem{" +
                 "id=" + id +
-                ", buyPrice=" + orderPrice +
+                ", orderPrice=" + orderPrice +
                 ", count=" + count +
                 '}';
     }

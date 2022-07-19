@@ -132,20 +132,18 @@ public class Main {
 //        System.out.println("members.size = " + members.size());
 //    }
 
-    public static void testORM_양방향(EntityManager em) {
+    public static void testORM_양방향_리팩토링(EntityManager em) {
         Team team1 = new Team("team1", "팀1");
         em.persist(team1);
 
         Member member1 = new Member("member1", "회원1");
 
         member1.setTeam(team1);
-        team1.getMembers().add(member1);
         em.persist(member1);
 
         Member member2 = new Member("member2", "회원2");
 
         member2.setTeam(team1);
-        team1.getMembers().add(member2);
         em.persist(member2);
     }
 }
