@@ -3,19 +3,25 @@ package jpabook.model.entity;
 import javax.persistence.*;
 
 @Entity
-@IdClass(MemberProductId.class)
-public class MemberProduct {
+public class Order {
     @Id
+    @GeneratedValue
+    @Column(name = "ORDER_ID")
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
     private int orderAmount;
+
+    public Long getId() {
+        return id;
+    }
 
     public Member getMember() {
         return member;

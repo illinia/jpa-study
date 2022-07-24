@@ -12,7 +12,7 @@ public class Member {
     private String name;
 
     @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts;
+    private List<Order> orders = new ArrayList<Order>();
 
     public void setId(String id) {
         this.id = id;

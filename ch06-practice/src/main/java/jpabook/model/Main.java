@@ -1,9 +1,6 @@
 package jpabook.model;
 
-import jpabook.model.entity.Member;
-import jpabook.model.entity.MemberProduct;
-import jpabook.model.entity.MemberProductId;
-import jpabook.model.entity.Product;
+import jpabook.model.entity.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -89,6 +86,42 @@ public class Main {
 //        }
 //    }
 
+    // 연결 엔티티 저장 식별 관계
+//    public static void save(EntityManager em) {
+//        Member member1 = new Member();
+//        member1.setId("member1");
+//        member1.setName("회원1");
+//        em.persist(member1);
+//
+//        Product productA = new Product();
+//        productA.setId("productA");
+//        productA.setName("상품1");
+//        em.persist(productA);
+//
+//        MemberProduct memberProduct = new MemberProduct();
+//        memberProduct.setMember(member1);
+//        memberProduct.setProduct(productA);
+//        memberProduct.setOrderAmount(2);
+//
+//        em.persist(memberProduct);
+//    }
+
+//    public static void find(EntityManager em) {
+//        MemberProductId memberProductId = new MemberProductId();
+//        memberProductId.setMember("member1");
+//        memberProductId.setProduct("productA");
+//
+//        MemberProduct memberProduct = em.find(MemberProduct.class, memberProductId);
+//
+//        Member member = memberProduct.getMember();
+//        Product product = memberProduct.getProduct();
+//
+//        System.out.println("member = " + member.getName());
+//        System.out.println("product = " + product.getName());
+//        System.out.println("orderAmount = " + memberProduct.getOrderAmount());
+//    }
+
+    // 새로운 기본키 사용 비식별 관계
     public static void save(EntityManager em) {
         Member member1 = new Member();
         member1.setId("member1");
@@ -100,26 +133,23 @@ public class Main {
         productA.setName("상품1");
         em.persist(productA);
 
-        MemberProduct memberProduct = new MemberProduct();
-        memberProduct.setMember(member1);
-        memberProduct.setProduct(productA);
-        memberProduct.setOrderAmount(2);
-
-        em.persist(memberProduct);
+        Order order = new Order();
+        order.setMember(member1);
+        order.setProduct(productA);
+        order.setOrderAmount(2);
+        em.persist(order);
     }
 
     public static void find(EntityManager em) {
-        MemberProductId memberProductId = new MemberProductId();
-        memberProductId.setMember("member1");
-        memberProductId.setProduct("productA");
+        Long orderId = 1L;
+        Order order = em.find(Order.class, orderId);
 
-        MemberProduct memberProduct = em.find(MemberProduct.class, memberProductId);
-
-        Member member = memberProduct.getMember();
-        Product product = memberProduct.getProduct();
+        Member member = order.getMember();
+        Product product = order.getProduct();
 
         System.out.println("member = " + member.getName());
         System.out.println("product = " + product.getName());
-        System.out.println("orderAmount = " + memberProduct.getOrderAmount());
+        System.out.println("orderAmount = " + order.getOrderAmount());
+        System.out.println("order = " + order.getId());
     }
 }
