@@ -3,21 +3,19 @@ package jpabook.model.entity;
 import javax.persistence.*;
 
 @Entity
-public class Locker {
-
+public class Product {
     @Id
-    @GeneratedValue
-    @Column(name = "LOCKER_ID")
-    private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member;
+    @Column(name = "PRODUCT_ID")
+    private String id;
 
     private String name;
 
-    public Long getId() {
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

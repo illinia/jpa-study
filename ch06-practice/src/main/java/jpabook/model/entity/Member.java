@@ -1,21 +1,34 @@
 package jpabook.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
     @Id
-    @GeneratedValue
     @Column(name = "MEMBER_ID")
     private String id;
     private String name;
 
-    @OneToOne(mappedBy = "member")
-    private Locker locker;
+    @ManyToMany
+    @JoinTable(name = "MEMBER_PRODUCT",
+        joinColumns = @JoinColumn(name = "MEMBER_ID"),
+        inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID")
+    )
+    private List<Product> products = new ArrayList<Product>();
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
-    private Team team;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public String getId() {
         return id;
@@ -29,15 +42,4 @@ public class Member {
         this.name = name;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-
-        if (!team.getMembers().contains(this)) {
-            team.getMembers().add(this);
-        }
-    }
 }
