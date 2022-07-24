@@ -15,12 +15,12 @@ public class Team {
     @JoinColumn(name = "TEAM_ID")
     private List<Member> members = new ArrayList<Member>();
 
-//    public void addMember(Member member) {
-//        this.members.add(member);
-//        if (member.getTeam() != this) {
-//            member.setTeam(this);
-//        }
-//    }
+    public void addMember(Member member) {
+        this.members.add(member);
+        if (member.getTeam() != this) {
+            member.setTeam(this);
+        }
+    }
 
     public Long getId() {
         return id;
