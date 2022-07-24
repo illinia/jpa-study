@@ -37,4 +37,17 @@ public class Main {
 
         emf.close(); //엔티티 매니저 팩토리 종료
     }
+
+    public static void testSave(EntityManager em) {
+        Member member1 = new Member();
+        Member member2 = new Member();
+
+        Team team1 = new Team();
+        team1.getMembers().add(member1);
+        team1.getMembers().add(member2);
+
+        em.persist(member1);
+        em.persist(member2);
+        em.persist(team1);
+    }
 }

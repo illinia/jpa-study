@@ -9,19 +9,20 @@ public class Team {
     @Id
     @GeneratedValue
     @Column(name = "TEAM_ID")
-    private String id;
+    private Long id;
     private String name;
-    @OneToMany(mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID")
     private List<Member> members = new ArrayList<Member>();
 
-    public void addMember(Member member) {
-        this.members.add(member);
-        if (member.getTeam() != this) {
-            member.setTeam(this);
-        }
-    }
+//    public void addMember(Member member) {
+//        this.members.add(member);
+//        if (member.getTeam() != this) {
+//            member.setTeam(this);
+//        }
+//    }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
