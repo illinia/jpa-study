@@ -4,25 +4,20 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by holyeye on 2014. 3. 11..
- */
 @Entity
 public class Item {
-
     @Id
     @GeneratedValue
     @Column(name = "ITEM_ID")
     private Long id;
 
-    private String name;        //이름
-    private int price;          //가격
-    private int stockQuantity;  //재고수량
+    private String name;
+    private String price;
+    private int stockQuantity;
 
-    @ManyToMany(mappedBy = "items")                         //**
-    private List<Category> categories = new ArrayList<Category>(); //**
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<Category>();
 
-    //Getter, Setter
     public Long getId() {
         return id;
     }
@@ -39,11 +34,11 @@ public class Item {
         this.name = name;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -61,14 +56,5 @@ public class Item {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
     }
 }
