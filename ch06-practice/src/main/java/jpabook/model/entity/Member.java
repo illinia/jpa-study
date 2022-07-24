@@ -11,23 +11,11 @@ public class Member {
     private String id;
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "MEMBER_PRODUCT",
-        joinColumns = @JoinColumn(name = "MEMBER_ID"),
-        inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID")
-    )
-    private List<Product> products = new ArrayList<Product>();
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts;
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 
     public String getId() {
