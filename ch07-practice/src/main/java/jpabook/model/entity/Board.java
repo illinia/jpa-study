@@ -3,6 +3,9 @@ package jpabook.model.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "BOARD")
+@SecondaryTable(name = "BOARD_DETAIL",
+pkJoinColumns = @PrimaryKeyJoinColumn(name = "BOARD_DETAIL_ID"))
 public class Board {
     @Id
     @GeneratedValue
@@ -11,30 +14,6 @@ public class Board {
 
     private String title;
 
-    @OneToOne(mappedBy = "board")
-    private BoardDetail boardDetail;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public BoardDetail getBoardDetail() {
-        return boardDetail;
-    }
-
-    public void setBoardDetail(BoardDetail boardDetail) {
-        this.boardDetail = boardDetail;
-    }
+    @Column(table = "BOARD_DETAIL")
+    private String content;
 }
