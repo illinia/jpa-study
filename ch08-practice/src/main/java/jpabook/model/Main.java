@@ -1,6 +1,7 @@
 package jpabook.model;
 
 import jpabook.model.entity.Member;
+import jpabook.model.entity.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,8 +24,9 @@ public class Main {
         try {
 
             tx.begin(); //트랜잭션 시작
-//            save(em);
-            checkProxy(em);
+            save(em);
+//            checkProxy(em);
+            logic(em);
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -39,14 +41,24 @@ public class Main {
 
     public static void save(EntityManager em) {
         Member member = new Member();
+        member.setId(1L);
+        Team team = new Team();
+        member.setTeam(team);
+        em.persist(team);
         em.persist(member);
     }
 
-    public static void checkProxy(EntityManager em) {
-        Member member = em.find(Member.class, 1L);
-        boolean isLoad = em.getEntityManagerFactory().getPersistenceUnitUtil().isLoaded(member);
+//    public static void checkProxy(EntityManager em) {
+//        Member member = em.find(Member.class, 1L);
+//        boolean isLoad = em.getEntityManagerFactory().getPersistenceUnitUtil().isLoaded(member);
+//
+//        System.out.println("isLoad = " + isLoad);
+//        System.out.println("memberProxy = " + member.getClass().getName());
+//    }
 
-        System.out.println("isLoad = " + isLoad);
-        System.out.println("memberProxy = " + member.getClass().getName());
+    public static void logic(EntityManager em) {
+        Member member = em.find(Member.class, 1L);
+        Team team = member.getTeam();
+        System.out.println(team);
     }
 }
