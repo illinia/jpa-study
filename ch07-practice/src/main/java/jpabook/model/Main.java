@@ -26,6 +26,7 @@ public class Main {
 
             save(em);
             find(em);
+            check();
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -39,9 +40,15 @@ public class Main {
     }
 
     public static void save(EntityManager em) {
+//        Parent parent = new Parent();
+//        parent.setId1("myId1");
+//        parent.setId2("myId2");
+//        parent.setName("parentName");
+//        em.persist(parent);
+
         Parent parent = new Parent();
-        parent.setId1("myId1");
-        parent.setId2("myId2");
+        ParentId parentId = new ParentId("myId1", "myId2");
+        parent.setId(parentId);
         parent.setName("parentName");
         em.persist(parent);
     }
@@ -50,5 +57,13 @@ public class Main {
         ParentId parentId = new ParentId("myId1", "myId2");
         Parent parent = em.find(Parent.class, parentId);
         System.out.println(parent);
+    }
+
+    public static void check() {
+        ParentId id1 = new ParentId("myId1", "myId2");
+
+        ParentId id2 = new ParentId("myId1", "myId2");
+
+        System.out.println(id1.equals(id2));
     }
 }
