@@ -1,7 +1,5 @@
 package jpabook.model.entity;
 
-import jdk.jpackage.internal.Log;
-
 import javax.persistence.*;
 
 @Entity
