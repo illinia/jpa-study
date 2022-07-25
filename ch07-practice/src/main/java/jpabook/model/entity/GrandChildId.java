@@ -1,9 +1,14 @@
 package jpabook.model.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class GrandChildId implements Serializable {
-    private ChildId child;
+    private ChildId childId;
+
+    @Column(name = "GRANDCHILD_ID")
     private String id;
 
     @Override
@@ -14,21 +19,5 @@ public class GrandChildId implements Serializable {
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
-    }
-
-    public ChildId getChild() {
-        return child;
-    }
-
-    public void setChild(ChildId child) {
-        this.child = child;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

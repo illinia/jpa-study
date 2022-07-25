@@ -3,9 +3,11 @@ package jpabook.model.entity;
 import javax.persistence.*;
 
 @Entity
-@IdClass(GrandChildId.class)
 public class GrandChild {
-    @Id
+    @EmbeddedId
+    private GrandChildId id;
+
+    @MapsId("childId")
     @ManyToOne
     @JoinColumns({
             @JoinColumn(name = "PARENT_ID"),
@@ -13,33 +15,5 @@ public class GrandChild {
     })
     private Child child;
 
-    @Id
-    @Column(name = "GRANDCHILD_ID")
-    private String id;
-
     private String name;
-
-    public Child getChild() {
-        return child;
-    }
-
-    public void setChild(Child child) {
-        this.child = child;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
