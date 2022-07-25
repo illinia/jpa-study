@@ -1,24 +1,23 @@
 package jpabook.model.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Member {
     @Id
-    @Column(name = "MEMBER_ID")
-    private Long id;
-
+    private String id;
     private String username;
+    private Integer age;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "TEAM_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Team team;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -30,6 +29,14 @@ public class Member {
         this.username = username;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
     public Team getTeam() {
         return team;
     }
@@ -37,4 +44,5 @@ public class Member {
     public void setTeam(Team team) {
         this.team = team;
     }
+
 }
