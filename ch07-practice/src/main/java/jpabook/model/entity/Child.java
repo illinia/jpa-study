@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 @Entity
 public class Child {
-    @EmbeddedId
-    private ChildId id;
+    @Id
+    @GeneratedValue
+    @Column(name = "CHILD_ID")
+    private Long id;
 
-    @MapsId("parentId")
     @ManyToOne
     @JoinColumn(name = "PARENT_ID")
     private Parent parent;

@@ -4,15 +4,13 @@ import javax.persistence.*;
 
 @Entity
 public class GrandChild {
-    @EmbeddedId
-    private GrandChildId id;
+    @Id
+    @GeneratedValue
+    @Column(name = "GRANDCHILD_ID")
+    private Long id;
 
-    @MapsId("childId")
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "PARENT_ID"),
-            @JoinColumn(name = "CHILD_ID")
-    })
+    @JoinColumn(name = "CHILD_ID")
     private Child child;
 
     private String name;
