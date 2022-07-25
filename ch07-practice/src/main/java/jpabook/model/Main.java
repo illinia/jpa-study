@@ -27,6 +27,7 @@ public class Main {
 //            save(em);
 //            find(em);
 //            check();
+            save(em);
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -66,4 +67,15 @@ public class Main {
 //
 //        System.out.println(id1.equals(id2));
 //    }
+
+    public static void save(EntityManager em) {
+        Board board = new Board();
+        board.setTitle("제목");
+        em.persist(board);
+
+        BoardDetail boardDetail = new BoardDetail();
+        boardDetail.setContent("내용");
+        boardDetail.setBoard(board);
+        em.persist(boardDetail);
+    }
 }
