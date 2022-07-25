@@ -9,9 +9,8 @@ public class Child {
     @Column(name = "CHILD_ID")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "PARENT_ID")
-    private Parent parent;
-
     private String name;
+
+    @OneToOne(mappedBy = "child")
+    private Parent parent;
 }
