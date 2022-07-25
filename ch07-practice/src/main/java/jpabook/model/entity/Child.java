@@ -3,24 +3,18 @@ package jpabook.model.entity;
 import javax.persistence.*;
 
 @Entity
+@IdClass(ChildId.class)
 public class Child {
     @Id
-    private String id;
-
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "PARENT_ID1", referencedColumnName = "PARENT_ID1"),
-            @JoinColumn(name = "PARENT_ID2", referencedColumnName = "PARENT_ID2")
-    })
+    @JoinColumn(name = "PARENT_ID")
     private Parent parent;
 
-    public String getId() {
-        return id;
-    }
+    @Id
+    @Column(name = "CHILD_ID")
+    private String childId;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    private String name;
 
     public Parent getParent() {
         return parent;
@@ -28,5 +22,21 @@ public class Child {
 
     public void setParent(Parent parent) {
         this.parent = parent;
+    }
+
+    public String getChildId() {
+        return childId;
+    }
+
+    public void setChildId(String childId) {
+        this.childId = childId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
