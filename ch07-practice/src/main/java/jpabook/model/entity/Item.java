@@ -5,8 +5,7 @@ import jdk.jpackage.internal.Log;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DTYPE")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Item {
     @Id
     @GeneratedValue
