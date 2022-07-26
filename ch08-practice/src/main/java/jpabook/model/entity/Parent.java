@@ -10,7 +10,7 @@ public class Parent {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "parent", orphanRemoval = true)
     private List<Child> children = new ArrayList<Child>();
 
     public Long getId() {

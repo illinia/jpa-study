@@ -32,7 +32,8 @@ public class Main {
 //            saveNoCascade(em);
             saveWithCascade(em);
 //            removeNoCascade(em);
-            removeWithCascade(em);
+//            removeWithCascade(em);
+            removeOrphan(em);
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -112,8 +113,13 @@ public class Main {
 //        em.remove(parent);
 //    }
 
-    private static void removeWithCascade(EntityManager em) {
+//    private static void removeWithCascade(EntityManager em) {
+//        Parent parent = em.find(Parent.class, 1L);
+//        em.remove(parent);
+//    }
+
+    private static void removeOrphan(EntityManager em) {
         Parent parent = em.find(Parent.class, 1L);
-        em.remove(parent);
+        parent.getChildren().remove(0);
     }
 }
