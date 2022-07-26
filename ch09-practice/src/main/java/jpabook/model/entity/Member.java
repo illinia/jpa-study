@@ -1,34 +1,56 @@
 package jpabook.model.entity;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Member {
     @Id
-    private String id;
-    private String username;
-    private Integer age;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Team team;
-
-    @Embedded
-    private Period workPeriod;
+    @GeneratedValue
+    private Long id;
 
     @Embedded
     private Address homeAddress;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "city", column = @Column(name = "COMPANY_CITY")),
-            @AttributeOverride(name = "street", column = @Column(name = "COMPANY_STREET")),
-            @AttributeOverride(name = "zipcode", column = @Column(name = "COMPANY_ZIPCODE"))
-    })
-    Address companyAddress;
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOODS",
+        joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<String>();
 
-    @Embedded
-    private PhoneNumber phoneNumber;
+//    @ElementCollection
+//    @CollectionTable(name = "ADDRESS",
+//            joinColumns = @JoinColumn(name = "MEMBER_ID"))
+//    private List<Address> addressHistory = new ArrayList<Address>();
+
+    // 값 타입 컬렉션 대신 일대다 관계 사용
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<AddressEntity>();
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+    public Set<String> getFavoriteFoods() {
+        return favoriteFoods;
+    }
+
+    public void setFavoriteFoods(Set<String> favoriteFoods) {
+        this.favoriteFoods = favoriteFoods;
+    }
 
 }

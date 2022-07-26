@@ -6,15 +6,19 @@ import javax.persistence.Embedded;
 
 @Embeddable
 public class Address {
-    @Column(name = "city")
+    @Column
     private String city;
     private String street;
-
-//    @Embedded
-//    private Zipcode zipcode;
-
     private String zipcode;
 
+    public Address() {
+    }
+
+    public Address(String city, String street, String zipcode) {
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
 
     public String getCity() {
         return city;
@@ -32,4 +36,11 @@ public class Address {
         this.street = street;
     }
 
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
 }
