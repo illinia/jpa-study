@@ -156,12 +156,50 @@ public class Main {
 //        System.out.println("resultList = " + resultList);
 
         // 페이징
-        TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m ORDER BY m.username DESC",
-                Member.class);
+//        TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m ORDER BY m.username DESC",
+//                Member.class);
+//
+//        query.setFirstResult(0);
+//        query.setMaxResults(20);
+//        System.out.println(query.getResultList().toString());
 
-        query.setFirstResult(0);
-        query.setMaxResults(20);
-        System.out.println(query.getResultList().toString());
+//        GROUP BY, HAVING
+//        String jpql = "SELECT t.name, COUNT(m.age), SUM(m.age), AVG(m.age), MAX(m.age), MIN(m.age) " +
+//                "FROM Member m LEFT JOIN m.team t " +
+//                "GROUP BY t.name " +
+//                "HAVING AVG(m.age) >= 10";
+
+//        ORDER BY
+//        String jqpl = "SELECT m FROM Member m ORDER BY m.age DESC, m.username ASC";
+
+//        내부조인
+//        String teamName = "team";
+//        String query = "SELECT m FROM Member m INNER JOIN m.team t " +
+//                "WHERE t.name = :teamName " +
+//                "ORDER BY m.age DESC";
+//
+//        List<Member> members = em.createQuery(query, Member.class)
+//                .setParameter("teamName", teamName)
+//                .getResultList();
+
+//        String query = "SELECT m, t FROM Member m JOIN m.team t";
+//        List<Object[]> result = em.createQuery(query).getResultList();
+//        for (Object[] row : result) {
+//            Member member = (Member) row[0];
+//            Team team = (Team) row[1];
+//        }
+
+//        외부조인
+//        "SELECT m FROM Member m LEFT JOIN m.team t";
+
+//        컬렉션 조인
+//        "SELECT t, m FROM Team t LEFT JOIN t.members m";
+
+//        세타 조인
+//        "SELECT COUNT(m) FROM Member m, Team t WHERE m.username = t.name"
+
+//        JOIN ON절
+//        "SELECT m, t FROM Member m LEFT JOIN m.team t on t.name = 'A'";
 
     }
 
