@@ -340,7 +340,26 @@ public class Main {
 //        다형성 쿼리
 //        "select i from Item i where type(i) IN (Book, Movie)";
 
-        "select i from Item i where treat(i as Book).author = 'kim'"
+//        "select i from Item i where treat(i as Book).author = 'kim'"
+
+//        엔티티 직접 사용
+//        "select count(m.id) from Member m";
+//        "select count(m) from Member m";
+
+//        Member member = new Member();
+//        em.persist(member);
+
+//        엔티티를 파라미터로 직접 받는 코드
+//        String jpql = "select m from Member m where m = :member";
+//        List resultList = em.createQuery(jpql)
+//                .setParameter("member", member)
+//                .getResultList();
+
+//        특정 팀에 소속된 회원 검색
+//        Team team = em.find(Team.class, 1L);
+//
+//        String jpql = "select m from Member m where m.team = :team";
+//        List resultList = em.createQuery(jpql).setParameter("team", team).getResultList();
     }
 
 }
