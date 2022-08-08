@@ -50,6 +50,12 @@ public class Main {
         member.setTeam(team);
         em.persist(member);
 
+        Member member1 = new Member();
+        member1.setUsername("test1");
+        member1.setAge(10);
+        member1.setTeam(team);
+        em.persist(member1);
+
         Product product = new Product();
         product.setName("product");
         product.setPrice(10000);
@@ -200,6 +206,40 @@ public class Main {
 
 //        JOIN ON절
 //        "SELECT m, t FROM Member m LEFT JOIN m.team t on t.name = 'A'";
+
+//        엔티티 페치 조인
+//        String jpql = "SELECT m FROM Member m JOIN FETCH m.team";
+//
+//        List<Member> members = em.createQuery(jpql, Member.class).getResultList();
+//
+//        for (Member member : members) {
+//            System.out.println("username = " + member.getUsername() + ", " + "teamname = " + member.getTeam().getName());
+//        }
+
+//        컬렉션 페치 조인
+//        String jpql = "SELECT t FROM Team t JOIN FETCH t.members WHERE t.name = 'team'";
+//        List<Team> teams = em.createQuery(jpql, Team.class).getResultList();
+//
+//        for (Team team : teams) {
+//            System.out.println("teamname = " + team.getName() + ", team = " + team);
+//
+//            for (Member member : team.getMembers()) {
+//                System.out.println("->username = " + member.getUsername() + ", member = " + member);
+//            }
+//        }
+
+//        페치 조인과 DISTINCT
+//        String jpql = "SELECT DISTINCT t FROM Team t JOIN FETCH t.members WHERE t.name = 'team'";
+//        List<Team> teams = em.createQuery(jpql, Team.class).getResultList();
+//
+//        for (Team team : teams) {
+//            System.out.println("teamname = " + team.getName() + ", team = " + team);
+//
+//            for (Member member : team.getMembers()) {
+//                System.out.println("->username = " + member.getUsername() + ", member = " + member);
+//            }
+//        }
+
 
     }
 
