@@ -154,6 +154,15 @@ public class Main {
 //
 //        List<UserDTO> resultList = query.getResultList();
 //        System.out.println("resultList = " + resultList);
+
+        // 페이징
+        TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m ORDER BY m.username DESC",
+                Member.class);
+
+        query.setFirstResult(0);
+        query.setMaxResults(20);
+        System.out.println(query.getResultList().toString());
+
     }
 
 }
