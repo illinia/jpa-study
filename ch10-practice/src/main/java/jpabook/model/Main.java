@@ -56,6 +56,11 @@ public class Main {
         member1.setTeam(team);
         em.persist(member1);
 
+        Member noName = new Member();
+        noName.setAge(10);
+        noName.setTeam(team);
+        em.persist(noName);
+
         Product product = new Product();
         product.setName("product");
         product.setPrice(10000);
@@ -240,7 +245,102 @@ public class Main {
 //            }
 //        }
 
+//        경로 표현식
+//        상태 필드 경로 탐색
+//        "SELECT m.username, m.age from Member m"
 
+//        단일 값 연관 경로 탐색
+//        "SELECT o.member from Order o";
+
+//        서브쿼리
+//        나이가 평균보다 많은 회원 검색
+//        "SELECT m from Member m WHERE m.age > (SELECT AVG(m2.age) FROM Member m2)"
+//        한 건이라도 주문한 고객 검색
+//        "SELECT m FROM Member m WHERE (SELECT COUNT(o) FROM Order o WHERE m = o.member) > 0"
+//        "SELECT m FROM Member m WHERE m.orders.size > 0"
+
+//        팀A에 소속된 회원
+//        "SELECT m FROM Member m WHERE EXISTS (SELECT t FROM m.team t WHERE t.name = '팀A')"
+
+//        전체 상품 각각의 재고보다 주문량이 많은 주문들
+//        String jpql = "SELECT o FROM Order o WHERE o.orderAmount > ALL (SELECT p.stockAmount FROM Product p)";
+//        List resultList = em.createQuery(jpql).getResultList();
+//        System.out.println(resultList);
+
+//        어떤 팀이든 팀에 소속된 회원
+//        "SELECT m FROM Member m WHERE m.team = ANY (SELECT t from Team t)"
+
+//        20세 이상을 보유한 팀
+//        "SELECT t from Team t WHERE t IN (SELECT t2 FROM Team t2 JOIN t2.members m2 WHERE m2.age >= 20)"
+
+//        나이가 10~20인 회원 검색
+//        "SELECT m FROM Member m WHERE m.age BETWEEN 10 and 20"
+
+//        이름이 team, team1인 회원 검색
+//        "SELECT m from Member m WHERE m.username in ('team','team1')"
+
+//        중간에 원 이라는 글자가 들어간 회원
+//        "SELECT m FROM Member m WHERE m.username like '%원%'"
+
+//        처음에 회원이라는 단어가 포함
+//        "WHERE m.username like'회원%'"
+
+//        마지막에 회원이라는 단어가 포함
+//        "WHERE m.username like '%회원'"
+
+//        회원A, 회원1
+//        "WHERE m.username like '회원_'"
+
+//        회원3
+//        "WHERE m.username like '__3'"
+
+//        회원%
+//        "WHERE m.username like '회원\%' ESCAPE '\'"
+
+//        NULL 비교식
+//        "WHERE m.username is NULL"
+//        "WHERE NULL = NULL" 거짓
+//        "WHERE 1 = 1" 참
+
+//        컬렉션 식
+//        "SELECT m FROM Member m WHERE m.orders is not empty";
+
+//        컬렉션 맴버 식
+//        "select t from Team t where :memberParam member of t.members"
+
+//        종료 이벤트 조회
+//        "select e from Event e where e.endDate < CURRENT_DATE"
+
+//        기본 CASE 식
+//        "select" +
+//                "case when m.age <= 10 then '학생요금'" +
+//                    "when m.age >= 60 then '경로요금'" +
+//                    "else '일반요금'" +
+//                "end" +
+//        "from Member m";
+
+//        심플 CASE
+//        "select " +
+//                "case t.name " +
+//                    "when '팀A' then '인센티브110%'" +
+//                    "when '팀B' then '인센티브120%'" +
+//                    "else '인센티브105%'" +
+//                "end" +
+//        "from Team t";
+
+//        COALESCE
+//        username이 null이면 이름 없는 회원을 반환
+//        String jpql = "select coalesce(m.username,'이름 없는 회원') from Member m";
+//        List<String> resultList = em.createQuery(jpql, String.class).getResultList();
+//        System.out.println(resultList);
+
+//        사용자 이름이 관리자면 null 반환 나머지는 본인 이름 반환
+//        "select NULLIF(m.username, '관리자') from Member m";
+
+//        다형성 쿼리
+//        "select i from Item i where type(i) IN (Book, Movie)";
+
+        "select i from Item i where treat(i as Book).author = 'kim'"
     }
 
 }
